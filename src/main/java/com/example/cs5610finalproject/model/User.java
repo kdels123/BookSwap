@@ -26,9 +26,9 @@ public class User {
 	private String city;
 	private String state;
 	
-//	@OneToMany(mappedBy="user")
-//	@JsonIgnore
-//	private List<Book> books;
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private List<BookUser> bookUser;
 	
 	@OneToMany(mappedBy="author")
 	@JsonIgnore
@@ -94,12 +94,12 @@ public class User {
 	public void setState(String state) {
 		this.state = state;
 	}
-//	public List<Book> getBooks() {
-//		return books;
-//	}
-//	public void setBooks(List<Book> books) {
-//		this.books = books;
-//	}
+	public List<BookUser> getBookUser() {
+		return bookUser;
+	}
+	public void setBookUser(List<BookUser> bookUser) {
+		this.bookUser = bookUser;
+	}
 	public List<Review> getReviews() {
 		return reviews;
 	}

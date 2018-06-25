@@ -20,9 +20,9 @@ public class Book {
 	private String title;
 	private String author;
 	
-//	@ManyToOne
-//	@JsonIgnore
-//	private User user;
+	@OneToMany(mappedBy="book")
+	@JsonIgnore
+	private List<BookUser> bookUser;
 	
 	@OneToMany(mappedBy="book")
 	@JsonIgnore
@@ -51,6 +51,12 @@ public class Book {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	public List<BookUser> getBookUser() {
+		return bookUser;
+	}
+	public void setBookUser(List<BookUser> bookUser) {
+		this.bookUser = bookUser;
 	}
 	public List<Review> getReviews() {
 		return reviews;
