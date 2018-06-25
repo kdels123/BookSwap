@@ -16,23 +16,35 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String type;
 	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String address;
 	private String city;
 	private String state;
 	
-	@OneToMany(mappedBy="user")
+//	@OneToMany(mappedBy="user")
+//	@JsonIgnore
+//	private List<Book> books;
+	
+	@OneToMany(mappedBy="author")
 	@JsonIgnore
-	private List<Book> books;
+	private List<Review> reviews;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getUsername() {
 		return username;
@@ -64,6 +76,12 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getCity() {
 		return city;
 	}
@@ -76,11 +94,17 @@ public class User {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public List<Book> getBooks() {
-		return books;
+//	public List<Book> getBooks() {
+//		return books;
+//	}
+//	public void setBooks(List<Book> books) {
+//		this.books = books;
+//	}
+	public List<Review> getReviews() {
+		return reviews;
 	}
-	public void setBooks(List<Book> books) {
-		this.books = books;
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 	
 }

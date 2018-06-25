@@ -1,32 +1,44 @@
 package com.example.cs5610finalproject.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Book {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String bookId;
 	private String title;
 	private String author;
-	private String description;
 	
-	@ManyToOne
+//	@ManyToOne
+//	@JsonIgnore
+//	private User user;
+	
+	@OneToMany(mappedBy="book")
 	@JsonIgnore
-	private User user;
+	private List<Review> reviews;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getBookId() {
+		return bookId;
+	}
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
 	}
 	public String getTitle() {
 		return title;
@@ -40,11 +52,11 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getDescription() {
-		return description;
+	public List<Review> getReviews() {
+		return reviews;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 }
