@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,4 +79,22 @@ public class BookUserService {
 		}
 		return userList;
 	}
+	
+	@DeleteMapping("/api/book/{bookId}/user/{userId}")
+	public void deleteBookUser(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId) {
+		List<BookUser> bookUserList = new ArrayList<BookUser>();
+		Optional<Book> bookData = bookRepo.findById(bookId);
+		Optional<User> userData = userRepo.findById(userId);
+		if (bookData.isPresent() && userData.isPresent()) {
+			Book book = bookData.get();
+			User user = userData.get();
+			bookUserList = (List<BookUser>) repository.findByCredentials(book, user);
+			BookUser bookUser = bookUserList.get(0);
+			repository.delete(bookUser);
+		}
+
+	}
+	
+	
+	
 }

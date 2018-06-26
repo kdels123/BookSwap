@@ -15,5 +15,10 @@ public interface BookUserRepository extends CrudRepository<BookUser, Integer> {
 	
 	@Query("SELECT bu FROM BookUser bu WHERE bu.book=:book")
 	Iterable<BookUser> findUserByBook(@Param("book") Book book);
+	
+	@Query("SELECT bu FROM BookUser bu WHERE bu.book=:book AND bu.user=:user")
+	Iterable<BookUser> findByCredentials(
+		@Param("book") Book book, 
+		@Param("user") User user);
 
 }
