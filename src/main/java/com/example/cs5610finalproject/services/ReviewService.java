@@ -49,6 +49,16 @@ public class ReviewService {
 		return null;
 	}
 	
+	@GetMapping("/api/user/{userId}/review")
+	public List<Review> findAllReviewsForUser(@PathVariable ("userId") int userId) {
+		Optional<User> data = userRepo.findById(userId);
+		if(data.isPresent()) {
+			User user = data.get();
+			return user.getReviews();
+		}
+		return null;
+	}
+	
 	@PostMapping("/api/book/{bookId}/user/{userId}/review")
 	public Review createReview(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId, @RequestBody Review review) {
 		Optional<Book> bookData = bookRepo.findById(bookId);
